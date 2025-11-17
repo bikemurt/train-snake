@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://c627c8qnhlh2l"]
+
+[ext_resource type="Script" uid="uid://bmh0f3ryi2kmd" path="res://prefabs/train_head/train_head.gd" id="1_jto6i"]
+[ext_resource type="ArrayMesh" uid="uid://b1ls18y6q043d" path="res://assets/models/train/trains_train-locomotive-a.res" id="2_xs3r6"]
+[ext_resource type="AudioStream" uid="uid://by4qkx361lg8j" path="res://assets/sounds/train.mp3" id="3_covpd"]
+[ext_resource type="AudioStream" uid="uid://i72qxl031svn" path="res://assets/sounds/whistle.mp3" id="4_wpfvn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xs3r6"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[node name="TrainHead" type="Node3D"]
+script = ExtResource("1_jto6i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = ExtResource("2_xs3r6")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_xs3r6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_covpd")
+
+[node name="WhistlePlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_wpfvn")
+volume_db = 10.0
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

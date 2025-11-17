@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c62rf6vx73i5b"]
+
+[ext_resource type="Script" uid="uid://mhouy20e4qg0" path="res://prefabs/train_car_follower/train_car_follower.gd" id="1_nrpnk"]
+[ext_resource type="ArrayMesh" uid="uid://ta8lyqei3uc5" path="res://assets/models/train/trains_train-carriage-container-red.res" id="2_m8ely"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m8ely"]
+size = Vector3(0.6, 0.6, 0.6)
+
+[node name="TrainCarFollower" type="Node3D"]
+script = ExtResource("1_nrpnk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
+mesh = ExtResource("2_m8ely")
+
+[node name="Area3D" type="Area3D" parent="." groups=["train_car_follower"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_m8ely")

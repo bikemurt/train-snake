@@ -1,0 +1,230 @@
+[gd_scene load_steps=14 format=3 uid="uid://dxkkpi846aa4a"]
+
+[ext_resource type="Texture2D" uid="uid://cblyr0bvoujg3" path="res://addons/kenney_prototype_textures/light/texture_08.png" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://sqmnignr3it1" path="res://scenes/main.gd" id="1_sugp2"]
+[ext_resource type="PackedScene" uid="uid://c627c8qnhlh2l" path="res://prefabs/train_head/train_head.tscn" id="2_0wfyh"]
+[ext_resource type="FontFile" uid="uid://bvok0p58xodhk" path="res://assets/fonts/CrimsonText-Bold.ttf" id="2_jyhfs"]
+[ext_resource type="AudioStream" uid="uid://bkbs1n872e8p0" path="res://assets/sounds/Metal_sounds.mp3" id="5_tbgi4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbgi4"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0wfyh"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_sugp2"]
+sky_material = SubResource("ProceduralSkyMaterial_0wfyh")
+
+[sub_resource type="Environment" id="Environment_jyhfs"]
+background_mode = 2
+sky = SubResource("Sky_sugp2")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0wfyh"]
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sugp2"]
+albedo_color = Color(0.63783336, 1, 0.47000003, 1)
+albedo_texture = ExtResource("1_o5qli")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o5qli"]
+size = Vector3(20, 20, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5qli"]
+shading_mode = 0
+albedo_color = Color(0.35906908, 0.35906908, 0.35906908, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_sugp2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Debug" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CellLabel" type="Label" parent="CanvasLayer/Debug"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Cell:"
+
+[node name="CellValue" type="Label" parent="CanvasLayer/Debug"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 48.0
+offset_right = 88.0
+offset_bottom = 23.0
+text = "Cell:"
+
+[node name="GameStartScreen" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.4)
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/GameStartScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.75
+offset_top = -70.75
+offset_right = 204.75
+offset_bottom = 70.75
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_jyhfs")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "Press [img=50x50]res://assets/ui/inputs/keyboard_space.png[/img] to start
+
+[img=50x50]res://assets/ui/inputs/keyboard_arrow_left.png[/img][img=50x50]res://assets/ui/inputs/keyboard_arrow_right.png[/img][img=50x50]res://assets/ui/inputs/keyboard_arrow_up.png[/img][img=50x50]res://assets/ui/inputs/keyboard_arrow_down.png[/img] to move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = 16.0
+offset_right = 264.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Score"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 60.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("2_jyhfs")
+theme_override_font_sizes/font_size = 25
+text = "SCORE:"
+
+[node name="ScoreValue" type="Label" parent="CanvasLayer/Score"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 104.0
+offset_top = 8.0
+offset_right = 185.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("2_jyhfs")
+theme_override_font_sizes/font_size = 25
+text = "SCORE:"
+
+[node name="HighScoreLabel" type="Label" parent="CanvasLayer/Score"]
+layout_mode = 0
+offset_left = 272.0
+offset_top = 8.0
+offset_right = 419.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("2_jyhfs")
+theme_override_font_sizes/font_size = 25
+text = "HIGH SCORE:"
+
+[node name="HighScoreValue" type="Label" parent="CanvasLayer/Score"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 432.0
+offset_top = 8.0
+offset_right = 513.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("2_jyhfs")
+theme_override_font_sizes/font_size = 25
+text = "SCORE:"
+
+[node name="Quit" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -103.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 67.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_jyhfs")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_tbgi4")
+text = "Quit"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jyhfs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.4302552, -0.59493446, 0.67892087, 0.76853496, 0.1531113, 0.62121725, -0.47353396, 0.7890564, 0.39135095, 0, 4.641786, 0)
+light_energy = 0.15
+shadow_enabled = true
+directional_shadow_max_distance = 34.6
+
+[node name="Level" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+
+[node name="Plane" type="MeshInstance3D" parent="Level"]
+unique_name_in_owner = true
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_0wfyh")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_sugp2")
+
+[node name="Walls" type="Node3D" parent="Level"]
+visible = false
+
+[node name="Wall1" type="MeshInstance3D" parent="Level/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.5)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_o5qli")
+surface_material_override/0 = SubResource("StandardMaterial3D_o5qli")
+
+[node name="Wall2" type="MeshInstance3D" parent="Level/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_o5qli")
+surface_material_override/0 = SubResource("StandardMaterial3D_o5qli")
+
+[node name="Wall3" type="MeshInstance3D" parent="Level/Walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.5, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_o5qli")
+surface_material_override/0 = SubResource("StandardMaterial3D_o5qli")
+
+[node name="Wall4" type="MeshInstance3D" parent="Level/Walls"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10.5, 0, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_o5qli")
+surface_material_override/0 = SubResource("StandardMaterial3D_o5qli")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.7793225e-08, -0.70510465, 0.7091032, 2.1962638e-08, 0.7091032, 0.70510465, -1, 4.2221956e-08, -1.131334e-08, 5.393, 4.681, -0.49)
+size = 20.0
+
+[node name="Train" type="Node3D" parent="."]
+
+[node name="TrainHead" parent="Train" instance=ExtResource("2_0wfyh")]
+unique_name_in_owner = true
+
+[node name="Followers" type="Node3D" parent="Train"]
+unique_name_in_owner = true
+
+[node name="CrashPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_tbgi4")
+
+[connection signal="pressed" from="CanvasLayer/Quit" to="." method="_on_quit_pressed"]
